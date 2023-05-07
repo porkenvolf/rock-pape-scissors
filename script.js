@@ -12,11 +12,10 @@ function getComputerChoice() {
   }
   return choice;
 }
+
 function playRound(playerChoice, computerChoice) {
-  playerChoice = playerChoice.toLowerCase();
+  playerChoice = (playerChoice) ? playerChoice.toLowerCase(): null;
   computerChoice = computerChoice.toLowerCase();
-  console.log(playerChoice);
-  console.log(computerChoice);
   let result;
   switch (playerChoice) {
     case "rock":
@@ -36,7 +35,21 @@ function playRound(playerChoice, computerChoice) {
       if (computerChoice === "paper") result = "You Win! Scissors beat Paper";
       if (computerChoice === "scissors") result = "It's a tie";
       break;
+    default:
+      result = "You didn't pick a right option, so you Lose!";
   }
   return result;
 }
-console.log(playRound(getComputerChoice(), getComputerChoice()));
+
+function game(rounds) {
+  for (let i = 1; i <= rounds; i++) {
+    let result = playRound(
+      prompt("Write Rock, Paper or Scissors", ""),
+      getComputerChoice()
+    );
+    let output = `Round ${i}: ${result}`;
+    console.log(output);
+  }
+}
+
+game(5);
